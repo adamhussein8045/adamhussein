@@ -1,64 +1,109 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Hussein | Application</title>
+  <meta name="description" content="Adam Hussein — web development enthusiast creating thoughtful digital experiences.">
+  <meta name="theme-color" content="#0b0b0c">
+  <title>Adam Hussein — Web Developer</title>
   <style>
-    * {
-      box-sizing: border-box;
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root { --bg:#0b0b0c; --surface:#121214; --surface-2:#19191c; --ink:#f2f0ed; --muted:#99969a; --line:#2a292c; --red:#e5413f; --red-dark:#b93132; --max:1180px; }
+    [data-theme="light"] { --bg:#f4f2ef; --surface:#fff; --surface-2:#ebe8e4; --ink:#181719; --muted:#666268; --line:#d9d5d0; --red:#c93235; --red-dark:#a4262a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Manrope, sans-serif; line-height:1.6; transition:background .3s,color .3s; }
+    a { color:inherit; text-decoration:none; }
+    a:focus-visible, button:focus-visible { outline:2px solid var(--red); outline-offset:4px; }
+    .container { width:min(calc(100% - 48px),var(--max)); margin:auto; }
+    .mono { color:var(--red); font:500 .7rem 'DM Mono',monospace; letter-spacing:.14em; text-transform:uppercase; }
+    .topbar { position:fixed; z-index:10; inset:0 0 auto; border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent); background:color-mix(in srgb,var(--bg) 84%,transparent); backdrop-filter:blur(16px); }
+    nav { height:76px; display:flex; align-items:center; justify-content:space-between; }
+    .brand { display:flex; gap:12px; align-items:center; font-weight:800; letter-spacing:-.04em; }
+    .brand-mark { display:grid; place-items:center; width:35px; height:35px; border:1px solid var(--red); color:var(--red); font:500 .73rem 'DM Mono',monospace; }
+    .nav-links { display:flex; gap:28px; align-items:center; font-size:.8rem; color:var(--muted); }
+    .nav-links a:hover { color:var(--ink); }
+    .controls { display:flex; gap:8px; align-items:center; }
+    .icon-button, .menu-button { border:1px solid var(--line); background:transparent; color:var(--ink); padding:8px 10px; cursor:pointer; font:500 .7rem 'DM Mono',monospace; }
+    .menu-button { display:none; }
+    .hero { min-height:100vh; display:grid; align-items:center; padding:140px 0 90px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; width:42vw; height:42vw; right:-16vw; top:13vh; border:1px solid var(--line); border-radius:50%; opacity:.7; }
+    .hero::after { content:''; position:absolute; width:26vw; height:26vw; right:-8vw; top:25vh; border:1px solid color-mix(in srgb,var(--red) 45%,var(--line)); border-radius:50%; }
+    .hero-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:8vw; align-items:center; position:relative; z-index:1; }
+    .eyebrow { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+    .eyebrow::before { content:''; width:28px; height:1px; background:var(--red); }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { max-width:800px; margin-bottom:24px; font-size:clamp(3.3rem,8vw,7.5rem); line-height:.97; letter-spacing:-.085em; }
+    h1 em { color:var(--red); font-style:normal; }
+    .hero-copy { max-width:540px; color:var(--muted); font-size:1.02rem; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:32px; }
+    .button { display:inline-flex; align-items:center; gap:20px; padding:14px 18px; border:1px solid var(--red); background:var(--red); color:#fff; font-size:.75rem; font-weight:700; transition:transform .2s,background .2s; }
+    .button:hover { background:var(--red-dark); transform:translateY(-2px); }
+    .button.secondary { background:transparent; color:var(--ink); border-color:var(--line); }
+    .button.secondary:hover { border-color:var(--ink); background:var(--surface); }
+    .hero-card { aspect-ratio:1; max-width:390px; margin-left:auto; display:grid; place-items:center; border:1px solid var(--line); background:linear-gradient(140deg,var(--surface),transparent); position:relative; }
+    .hero-card::before { content:'WEB\A DEVELOPMENT'; white-space:pre; position:absolute; top:18px; left:18px; color:var(--muted); font:500 .62rem/1.5 'DM Mono',monospace; letter-spacing:.15em; }
+    .monogram { font-size:clamp(6rem,17vw,12rem); line-height:1; letter-spacing:-.15em; font-weight:800; color:var(--red); transform:translateX(-.08em); }
+    .hero-card .coordinates { position:absolute; bottom:18px; right:18px; font:500 .62rem 'DM Mono',monospace; color:var(--muted); }
+    section { padding:120px 0; border-top:1px solid var(--line); }
+    .section-head { display:flex; justify-content:space-between; gap:30px; align-items:flex-start; margin-bottom:55px; }
+    .section-head h2 { max-width:620px; margin:0; font-size:clamp(2rem,4vw,4rem); line-height:1.05; letter-spacing:-.07em; }
+    .section-number { color:var(--muted); font:500 .7rem 'DM Mono',monospace; }
+    .about-grid { display:grid; grid-template-columns:.8fr 1.2fr; gap:10vw; }
+    .about-lead { font-size:clamp(1.25rem,2.2vw,2rem); line-height:1.35; letter-spacing:-.035em; }
+    .about-body { color:var(--muted); max-width:600px; }
+    .quote { margin-top:42px; padding:24px 0 0 22px; border-left:2px solid var(--red); color:var(--ink); font-size:1.1rem; font-style:italic; }
+    .strengths { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .strength { min-height:230px; padding:28px; background:var(--bg); transition:background .2s; }
+    .strength:hover { background:var(--surface); }
+    .strength b { display:block; margin:34px 0 10px; font-size:1.25rem; letter-spacing:-.04em; }
+    .strength p { color:var(--muted); font-size:.9rem; }
+    .project-empty { display:flex; justify-content:space-between; align-items:center; gap:30px; padding:44px; border:1px solid var(--line); background:var(--surface); }
+    .project-empty h3 { margin-bottom:8px; font-size:1.5rem; letter-spacing:-.04em; }
+    .project-empty p { margin:0; color:var(--muted); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:10vw; }
+    .contact-grid h2 { max-width:520px; margin:0; font-size:clamp(2.5rem,5vw,5rem); line-height:1; letter-spacing:-.08em; }
+    .contact-links { display:flex; flex-direction:column; }
+    .contact-link { display:flex; justify-content:space-between; align-items:center; padding:18px 0; border-bottom:1px solid var(--line); color:var(--muted); font-size:.9rem; }
+    .contact-link:hover { color:var(--red); }
+    .contact-link span:last-child { font-family:'DM Mono',monospace; font-size:.75rem; }
+    footer { padding:30px 0; border-top:1px solid var(--line); color:var(--muted); font-size:.75rem; }
+    .footer-row { display:flex; justify-content:space-between; gap:20px; align-items:center; }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a:hover { color:var(--red); }
+    @media (max-width:760px) {
+      .container { width:min(calc(100% - 32px),var(--max)); }
+      nav { height:68px; } .nav-links { display:none; position:absolute; top:68px; left:0; right:0; padding:22px 16px; background:var(--bg); border-bottom:1px solid var(--line); flex-direction:column; align-items:flex-start; gap:18px; } .nav-links.open { display:flex; } .menu-button { display:block; }
+      .hero { padding-top:120px; } .hero-grid,.about-grid,.contact-grid { grid-template-columns:1fr; gap:48px; } .hero-card { margin:0; max-width:100%; width:100%; } .hero-card::before { font-size:.55rem; }
+      section { padding:80px 0; } .section-head { display:block; margin-bottom:35px; } .section-number { display:block; margin-bottom:18px; } .strengths { grid-template-columns:1fr; } .strength { min-height:180px; } .strength b { margin-top:22px; } .project-empty { display:block; padding:28px; } .project-empty .button { margin-top:25px; } .footer-row { align-items:flex-start; flex-direction:column; }
     }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: #08090d;
-      color: #f5f5f5;
-      font-family: Arial, sans-serif;
-    }
-
-    main {
-      max-width: 560px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      margin-bottom: 12px;
-    }
-
-    h1 span {
-      color: #6d8cff;
-    }
-
-    p {
-      color: #a4a7b5;
-      line-height: 1.8;
-    }
-
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 13px 24px;
-      border-radius: 10px;
-      background: #6d8cff;
-      color: #08090d;
-      text-decoration: none;
-      font-weight: bold;
-    }
+    @media (prefers-reduced-motion:reduce) { *,html { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Adam <span>Hussein</span></h1>
-    <p>Your next project starts here.</p>
-    <a href="https://github.com/adamhussein8045">
-      Explore GitHub
-    </a>
+  <header class="topbar"><nav class="container" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="Adam Hussein home"><span class="brand-mark">AH</span><span>Adam Hussein</span></a>
+    <div class="nav-links" id="nav-links"><a href="#about" data-en="About" data-ar="نبذة">About</a><a href="#strengths" data-en="Strengths" data-ar="نقاط القوة">Strengths</a><a href="#projects" data-en="Projects" data-ar="المشاريع">Projects</a><a href="#contact" data-en="Contact" data-ar="تواصل">Contact</a></div>
+    <div class="controls"><button class="icon-button" id="lang-toggle" type="button" aria-label="Switch to Arabic">AR</button><button class="icon-button" id="theme-toggle" type="button" aria-label="Switch theme">☼</button><button class="menu-button" id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button></div>
+  </nav></header>
+  <main id="top">
+    <section class="hero"><div class="container hero-grid"><div><div class="eyebrow mono" data-en="Web developer · Cairo, Egypt" data-ar="مطور ويب · القاهرة، مصر">Web developer · Cairo, Egypt</div><h1 data-en="Turning ideas into <em>digital experiences.</em>" data-ar="تحويل الأفكار إلى <em>تجارب رقمية.</em>">Turning ideas into <em>digital experiences.</em></h1><p class="hero-copy" data-en="I'm a web development enthusiast who enjoys learning, building, solving problems, and turning creative ideas into useful digital experiences." data-ar="أنا شغوف بتطوير الويب، أستمتع بالتعلم والبناء وحل المشكلات وتحويل الأفكار الإبداعية إلى تجارب رقمية مفيدة.">I'm a web development enthusiast who enjoys learning, building, solving problems, and turning creative ideas into useful digital experiences.</p><div class="actions"><a class="button" href="#projects" data-en="Explore projects →" data-ar="استكشف المشاريع ←">Explore projects →</a><a class="button secondary" href="#contact" data-en="Get in touch" data-ar="تواصل معي">Get in touch</a></div></div><div class="hero-card" aria-label="AH monogram graphic"><div class="monogram">AH</div><div class="coordinates">30.0444° N / 31.2357° E</div></div></div></section>
+    <section id="about"><div class="container"><div class="section-head"><span class="section-number">01 / 04</span><h2 data-en="Curious by nature. Building with intention." data-ar="فضولي بطبيعتي. أبني بهدف.">Curious by nature. Building with intention.</h2></div><div class="about-grid"><p class="about-lead" data-en="Hi, I'm Adam Hussein — a web development enthusiast who enjoys turning ideas into digital experiences." data-ar="مرحباً، أنا آدم حسين — شغوف بتطوير الويب وأستمتع بتحويل الأفكار إلى تجارب رقمية.">Hi, I'm Adam Hussein — a web development enthusiast who enjoys turning ideas into digital experiences.</p><div class="about-body"><p data-en="I'm passionate about learning, building, and exploring how things work. I believe that every project is an opportunity to develop new skills, solve problems, and transform creative ideas into something people can actually use." data-ar="أحب التعلم والبناء واستكشاف كيفية عمل الأشياء. أؤمن أن كل مشروع فرصة لتطوير مهارات جديدة وحل المشكلات وتحويل الأفكار الإبداعية إلى شيء يمكن للناس استخدامه فعلاً.">I'm passionate about learning, building, and exploring how things work. I believe that every project is an opportunity to develop new skills, solve problems, and transform creative ideas into something people can actually use.</p><p data-en="Beyond coding, I enjoy thinking critically, experimenting with new ideas, and finding better ways to approach challenges. I'm focused on continuous improvement, building projects that reflect my abilities, and growing step by step as a developer." data-ar="بعيداً عن البرمجة، أستمتع بالتفكير النقدي وتجربة الأفكار الجديدة وإيجاد طرق أفضل للتعامل مع التحديات. أركز على التطور المستمر وبناء مشاريع تعكس قدراتي والنمو خطوة بخطوة كمطور.">Beyond coding, I enjoy thinking critically, experimenting with new ideas, and finding better ways to approach challenges. I'm focused on continuous improvement, building projects that reflect my abilities, and growing step by step as a developer.</p><blockquote class="quote" data-en="“Keep learning, keep building, and create things that make a difference.”" data-ar="“استمر في التعلم، استمر في البناء، واصنع أشياء تُحدث فرقاً.”">“Keep learning, keep building, and create things that make a difference.”</blockquote></div></div></div></section>
+    <section id="strengths"><div class="container"><div class="section-head"><span class="section-number">02 / 04</span><h2 data-en="The way I approach the work." data-ar="طريقتي في التعامل مع العمل.">The way I approach the work.</h2></div><div class="strengths"><article class="strength"><span class="mono">01</span><b data-en="Continuous learning" data-ar="التعلم المستمر">Continuous learning</b><p data-en="Staying curious, exploring how things work, and improving one step at a time." data-ar="الحفاظ على الفضول واستكشاف كيفية عمل الأشياء والتطور خطوة بخطوة.">Staying curious, exploring how things work, and improving one step at a time.</p></article><article class="strength"><span class="mono">02</span><b data-en="Creative thinking" data-ar="التفكير الإبداعي">Creative thinking</b><p data-en="Looking at ideas from different angles and finding thoughtful ways to bring them to life." data-ar="النظر إلى الأفكار من زوايا مختلفة وإيجاد طرق مدروسة لتحويلها إلى واقع.">Looking at ideas from different angles and finding thoughtful ways to bring them to life.</p></article><article class="strength"><span class="mono">03</span><b data-en="Problem solving" data-ar="حل المشكلات">Problem solving</b><p data-en="Breaking challenges down, learning from them, and searching for better approaches." data-ar="تفكيك التحديات والتعلم منها والبحث عن طرق أفضل للتعامل معها.">Breaking challenges down, learning from them, and searching for better approaches.</p></article></div></div></section>
+    <section id="projects"><div class="container"><div class="section-head"><span class="section-number">03 / 04</span><h2 data-en="A space for what comes next." data-ar="مساحة لما هو قادم.">A space for what comes next.</h2></div><div class="project-empty"><div><span class="mono" data-en="Projects / 001" data-ar="المشاريع / 001">Projects / 001</span><h3 data-en="Projects are on their way." data-ar="المشاريع قادمة قريباً.">Projects are on their way.</h3><p data-en="This collection will grow alongside my development journey. Follow along on GitHub for what I'm building next." data-ar="ستنمو هذه المجموعة مع رحلتي في التطوير. تابعني على GitHub لمعرفة ما أبنيه لاحقاً.">This collection will grow alongside my development journey. Follow along on GitHub for what I'm building next.</p></div><a class="button secondary" href="https://github.com/adamhussein8045" target="_blank" rel="noopener noreferrer" data-en="Visit GitHub ↗" data-ar="زيارة GitHub ↗">Visit GitHub ↗</a></div></div></section>
+    <section id="contact"><div class="container contact-grid"><div><span class="mono" data-en="04 / 04 — Contact" data-ar="04 / 04 — تواصل">04 / 04 — Contact</span><h2 data-en="Let's make something meaningful." data-ar="لنبنِ شيئاً ذا معنى.">Let's make something meaningful.</h2></div><div class="contact-links"><a class="contact-link" href="mailto:adamhussen0215@gmail.com"><span>Email</span><span>↗</span></a><a class="contact-link" href="tel:+201210278246"><span>Phone</span><span>↗</span></a><a class="contact-link" href="https://github.com/adamhussein8045" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span>↗</span></a><a class="contact-link" href="https://www.facebook.com/adamHussein8045/" target="_blank" rel="noopener noreferrer"><span>Facebook</span><span>↗</span></a></div></div></section>
   </main>
+  <footer><div class="container footer-row"><span>© <span id="year"></span> Adam Hussein</span><div class="footer-links"><a href="https://github.com/adamhussein8045" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://www.facebook.com/adamHussein8045/" target="_blank" rel="noopener noreferrer">Facebook</a><a href="#top" data-en="Back to top ↑" data-ar="العودة للأعلى ↑">Back to top ↑</a></div></div></footer>
+  <script>
+    const root=document.documentElement, langButton=document.querySelector('#lang-toggle'), themeButton=document.querySelector('#theme-toggle'), menuButton=document.querySelector('#menu-toggle'), navLinks=document.querySelector('#nav-links');
+    let language='en';
+    document.querySelector('#year').textContent=new Date().getFullYear();
+    const storedTheme=localStorage.getItem('adam-theme'); if(storedTheme) root.dataset.theme=storedTheme;
+    function setLanguage(next){ language=next; document.documentElement.lang=next; document.documentElement.dir=next==='ar'?'rtl':'ltr'; document.querySelectorAll('[data-en]').forEach(el=>{el.innerHTML=el.dataset[next]}); langButton.textContent=next==='en'?'AR':'EN'; langButton.setAttribute('aria-label',next==='en'?'Switch to Arabic':'التبديل إلى الإنجليزية'); }
+    langButton.addEventListener('click',()=>setLanguage(language==='en'?'ar':'en'));
+    themeButton.addEventListener('click',()=>{const next=root.dataset.theme==='dark'?'light':'dark'; root.dataset.theme=next; localStorage.setItem('adam-theme',next); themeButton.textContent=next==='dark'?'☼':'●';});
+    menuButton.addEventListener('click',()=>{const open=navLinks.classList.toggle('open'); menuButton.setAttribute('aria-expanded',open);});
+    navLinks.addEventListener('click',event=>{if(event.target.tagName==='A'){navLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false')}});
+  </script>
 </body>
 </html>
