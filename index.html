@@ -303,6 +303,22 @@
         scroll-behavior: auto !important;
       }
     }
+    
+/* Disable text selection */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Keep the profile image non-draggable */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
   </style>
 </head>
 
@@ -659,7 +675,45 @@
         stopAnimation();
       }, { once: true });
     })();
-  </script>
+    
+(() => {
+  // Disable the right-click context menu.
+  document.addEventListener("contextmenu", (event) => {
+    event.preventDefault();
+  });
 
+  // Block common copy and cut actions.
+  document.addEventListener("copy", (event) => {
+    event.preventDefault();
+  });
+
+  document.addEventListener("cut", (event) => {
+    event.preventDefault();
+  });
+
+  // Block dragging page elements.
+  document.addEventListener("dragstart", (event) => {
+    event.preventDefault();
+  });
+
+  // Block common developer-tools shortcuts.
+  document.addEventListener("keydown", (event) => {
+    const key = event.key.toLowerCase();
+    const ctrlOrCmd = event.ctrlKey || event.metaKey;
+
+    const blocked =
+      key === "f12" ||
+      (ctrlOrCmd && event.shiftKey &&
+        ["i", "j", "c"].includes(key)) ||
+      (ctrlOrCmd && ["u", "s", "c", "x"].includes(key));
+
+    if (blocked) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }, true);
+})();
+
+  </script>
 </body>
 </html>
