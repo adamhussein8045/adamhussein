@@ -1,82 +1,353 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adam Hussein | Application</title>
+
+  <title>Adam Hussein | Official Links</title>
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Explore Adam Hussein's official social profiles and gaming accounts.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --blue: #70a5ff;
+      --purple: #a78bfa;
+      --text: #f4f6ff;
+      --muted: #929bb2;
+      --card: rgba(19, 25, 43, 0.78);
+    }
+
     body {
-      margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      background: #08090d;
-      color: #f5f5f5;
-      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px 18px;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 15% 15%, #172c55 0%, transparent 42%),
+        radial-gradient(ellipse at 85% 85%, #301c50 0%, transparent 40%),
+        #080b14;
+      color: var(--text);
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.15;
+      background-image: radial-gradient(#9dbbff 0.7px, transparent 0.7px);
+      background-size: 25px 25px;
     }
 
     main {
-      max-width: 560px;
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      padding: 38px 28px;
       text-align: center;
+      background: var(--card);
+      border: 1px solid rgba(157, 184, 255, 0.17);
+      border-radius: 28px;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 25px 90px rgba(0, 0, 0, 0.35);
+      animation: appear 0.8s ease both;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 22px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 0 45px rgba(112, 165, 255, 0.25);
+      font-size: 34px;
+      font-weight: 800;
+      color: #080b14;
+      transform: rotate(-4deg);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(112, 165, 255, 0.2);
+      border-radius: 30px;
+      background: rgba(112, 165, 255, 0.07);
+      color: #b9d1ff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #70e5ad;
+      box-shadow: 0 0 12px #70e5ad;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      margin-bottom: 12px;
+      font-size: clamp(34px, 8vw, 46px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.15;
     }
 
     h1 span {
-      color: #6d8cff;
+      display: block;
+      margin-top: 4px;
+      background: linear-gradient(90deg, #70a5ff, #b8a1ff, #70d9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    p {
-      color: #a4a7b5;
-      line-height: 1.8;
+    .subtitle {
+      margin: 16px 0 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
     }
 
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 13px 24px;
-      border-radius: 10px;
-      background: #6d8cff;
-      color: #08090d;
+    .section-title {
+      margin-bottom: 13px;
+      color: #75819b;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .links {
+      display: grid;
+      gap: 11px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 64px;
+      padding: 12px 15px;
+      border: 1px solid rgba(160, 180, 230, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.025);
+      color: var(--text);
       text-decoration: none;
-      font-weight: bold;
+      text-align: left;
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .link:hover {
+      transform: translateY(-3px);
+      border-color: rgba(112, 165, 255, 0.5);
+      background: rgba(112, 165, 255, 0.09);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .link:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    .link-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(112, 165, 255, 0.1);
+      font-size: 19px;
+    }
+
+    .link-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-info strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .link-info small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .arrow {
+      color: #7383a5;
+      font-size: 19px;
+      transition: transform 0.25s ease;
+    }
+
+    .link:hover .arrow {
+      transform: translateX(4px);
+      color: var(--blue);
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 19px;
+      border-top: 1px solid rgba(160, 180, 230, 0.1);
+      color: #66718a;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
+
+    footer span {
+      color: #a4bfff;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 420px) {
+      main {
+        padding: 30px 19px;
+        border-radius: 23px;
+      }
+
+      .avatar {
+        width: 78px;
+        height: 78px;
+        border-radius: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
     }
   </style>
 </head>
+
 <body>
   <main>
-    <h1>Adam <span>Hussein</span></h1>
-    <p>Your next project starts here.</p>
-    <a href="https://github.com/adamhussein8045">
-      Explore GitHub
-    </a>
-        <a href="https://facebook.com/adamhussein8045">
-      Explore Facebook
-    </a>
-        <a href="https://www.pinterest.com/adamhussein8045/">
-      Explore Pinterest
-    </a>
-        </a>
-        <a href="https://www.twitch.tv/adamhussein8045">
-      Explore Twitch
-    </a>
-        </a>
-        <a href="https://www.crazygames.com/u/adamhussein8045">
-      Join Crazy Games
-    </a>
-            </a>
-        <a href="https://foony.com/@adamhussein_8045">
-      Add Foony
-    </a>
+    <div class="avatar" aria-label="Adam Hussein initials">AH</div>
+
+    <div class="status">OFFICIAL PROFILE</div>
+
+    <h1>
+      Adam
+      <span>Hussein</span>
+    </h1>
+
+    <p class="subtitle">
+      Welcome to my digital space.<br>
+      Gaming, creativity &amp; more.
+    </p>
+
+    <div class="section-title">Connect with me</div>
+
+    <nav class="links" aria-label="Social media profiles">
+
+      <a class="link" href="https://github.com/adamhussein8045"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">⌘</span>
+        <span class="link-info">
+          <strong>GitHub</strong>
+          <small>Projects &amp; code</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="link" href="https://facebook.com/adamhussein8045"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">ⓕ</span>
+        <span class="link-info">
+          <strong>Facebook</strong>
+          <small>Connect with me</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="link" href="https://www.pinterest.com/adamhussein8045/"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">℗</span>
+        <span class="link-info">
+          <strong>Pinterest</strong>
+          <small>Ideas &amp; inspiration</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="link" href="https://www.twitch.tv/adamhussein8045"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">🎮</span>
+        <span class="link-info">
+          <strong>Twitch</strong>
+          <small>Gaming &amp; streams</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="link" href="https://www.crazygames.com/u/adamhussein8045"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">🕹️</span>
+        <span class="link-info">
+          <strong>CrazyGames</strong>
+          <small>My gaming profile</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <a class="link" href="https://foony.com/@adamhussein_8045"
+         target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">✨</span>
+        <span class="link-info">
+          <strong>Foony</strong>
+          <small>Play &amp; connect</small>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+
+    </nav>
+
+    <footer>
+      Designed with <span>♥</span> by Adam Hussein
+    </footer>
   </main>
 </body>
 </html>
