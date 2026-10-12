@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
   <title>Adam Hussein | Official Links</title>
   <meta name="theme-color" content="#080b14">
   <meta name="description" content="Explore Adam Hussein's official social profiles and gaming accounts.">
+  <meta name="color-scheme" content="dark">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,13 +29,20 @@
       --card: rgba(19, 25, 43, 0.78);
     }
 
+    html {
+      min-height: 100%;
+    }
+
     body {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 32px 18px;
       overflow-x: hidden;
+      position: relative;
+      isolation: isolate;
       background:
         radial-gradient(ellipse at 15% 15%, #172c55 0%, transparent 42%),
         radial-gradient(ellipse at 85% 85%, #301c50 0%, transparent 40%),
@@ -42,18 +51,35 @@
       font-family: 'Inter', Arial, sans-serif;
     }
 
+    /* Subtle dotted background */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
+      z-index: 0;
       pointer-events: none;
       opacity: 0.15;
-      background-image: radial-gradient(#9dbbff 0.7px, transparent 0.7px);
+      background-image: radial-gradient(
+        #9dbbff 0.7px,
+        transparent 0.7px
+      );
       background-size: 25px 25px;
+    }
+
+    /* Animated background canvas */
+    #antigravity-bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+      pointer-events: none;
     }
 
     main {
       position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 480px;
       padding: 38px 28px;
@@ -61,8 +87,8 @@
       background: var(--card);
       border: 1px solid rgba(157, 184, 255, 0.17);
       border-radius: 28px;
-      backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(22px);
       box-shadow: 0 25px 90px rgba(0, 0, 0, 0.35);
       animation: appear 0.8s ease both;
     }
@@ -72,28 +98,24 @@
       height: 92px;
       display: grid;
       place-items: center;
+      overflow: hidden;
       margin: 0 auto 22px;
       border-radius: 28px;
       background: linear-gradient(135deg, var(--blue), var(--purple));
       box-shadow: 0 0 45px rgba(112, 165, 255, 0.25);
-      font-size: 34px;
-      font-weight: 800;
-      color: #080b14;
       transform: rotate(-4deg);
     }
-.avatar {
-  overflow: hidden;
-}
 
-.avatar img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  border-radius: inherit;
-  transform: rotate(4deg) scale(1.12);
-}
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border-radius: inherit;
+      transform: rotate(4deg) scale(1.12);
+    }
+
     .status {
       display: inline-flex;
       align-items: center;
@@ -114,6 +136,7 @@
       content: "";
       width: 7px;
       height: 7px;
+      flex-shrink: 0;
       border-radius: 50%;
       background: #70e5ad;
       box-shadow: 0 0 12px #70e5ad;
@@ -129,7 +152,12 @@
     h1 span {
       display: block;
       margin-top: 4px;
-      background: linear-gradient(90deg, #70a5ff, #b8a1ff, #70d9ff);
+      background: linear-gradient(
+        90deg,
+        #70a5ff,
+        #b8a1ff,
+        #70d9ff
+      );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -246,6 +274,7 @@
         opacity: 0;
         transform: translateY(18px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -266,7 +295,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important;
@@ -276,10 +307,18 @@
 </head>
 
 <body>
+
+  <!-- Fixed background canvas -->
+  <canvas id="antigravity-bg" aria-hidden="true"></canvas>
+
   <main>
- <div class="avatar">
-  <img src="profile.jpeg" alt="Adam Hussein">
-</div>
+    <div class="avatar">
+      <img
+        src="profile.jpeg"
+        alt="Adam Hussein"
+        onerror="this.style.display='none'; this.parentElement.textContent='AH';"
+      >
+    </div>
 
     <div class="status">OFFICIAL PROFILE</div>
 
@@ -297,54 +336,78 @@
 
     <nav class="links" aria-label="Social media profiles">
 
-      <a class="link" href="https://github.com/adamhussein8045"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">⌘</span>
+      <a
+        class="link"
+        href="https://github.com/adamhussein8045"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">⌘</span>
         <span class="link-info">
           <strong>GitHub</strong>
           <small>Projects &amp; code</small>
         </span>
       </a>
 
-      <a class="link" href="https://facebook.com/adamhussein8045"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">ⓕ</span>
+      <a
+        class="link"
+        href="https://facebook.com/adamhussein8045"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">ⓕ</span>
         <span class="link-info">
           <strong>Facebook</strong>
           <small>Connect with me</small>
         </span>
       </a>
 
-      <a class="link" href="https://www.pinterest.com/adamhussein8045/"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">℗</span>
+      <a
+        class="link"
+        href="https://www.pinterest.com/adamhussein8045/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">℗</span>
         <span class="link-info">
           <strong>Pinterest</strong>
           <small>Ideas &amp; inspiration</small>
         </span>
       </a>
 
-      <a class="link" href="https://www.twitch.tv/adamhussein8045"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">🎮</span>
+      <a
+        class="link"
+        href="https://www.twitch.tv/adamhussein8045"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">🎮</span>
         <span class="link-info">
           <strong>Twitch</strong>
           <small>Gaming &amp; streams</small>
         </span>
       </a>
 
-      <a class="link" href="https://www.crazygames.com/u/adamhussein8045"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">🕹️</span>
+      <a
+        class="link"
+        href="https://www.crazygames.com/u/adamhussein8045"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">🕹️</span>
         <span class="link-info">
           <strong>CrazyGames</strong>
           <small>My gaming profile</small>
         </span>
       </a>
 
-      <a class="link" href="https://foony.com/@adamhussein_8045"
-         target="_blank" rel="noopener noreferrer">
-        <span class="link-icon">✨</span>
+      <a
+        class="link"
+        href="https://foony.com/@adamhussein_8045"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="link-icon" aria-hidden="true">✨</span>
         <span class="link-info">
           <strong>Foony</strong>
           <small>Play &amp; connect</small>
@@ -357,156 +420,246 @@
       Designed with <span>♥</span> by Adam Hussein
     </footer>
   </main>
-<script>
-(() => {
-  const canvas = document.getElementById("antigravity-bg");
-  const ctx = canvas.getContext("2d");
 
-  if (!ctx) return;
+  <script>
+    (() => {
+      const canvas = document.getElementById("antigravity-bg");
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  );
+      if (!canvas) return;
 
-  let width = 0;
-  let height = 0;
-  let particles = [];
-  let animationId;
-  let lastTime = 0;
+      const ctx = canvas.getContext("2d");
 
-  const mouse = {
-    x: -1000,
-    y: -1000
-  };
+      if (!ctx) return;
 
-  const colors = [
-    [112, 165, 255],
-    [167, 139, 250],
-    [112, 217, 255]
-  ];
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
 
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      let animationId = null;
+      let lastTime = 0;
+      let destroyed = false;
 
-    width = window.innerWidth;
-    height = window.innerHeight;
+      const mouse = {
+        x: -1000,
+        y: -1000
+      };
 
-    canvas.width = Math.round(width * dpr);
-    canvas.height = Math.round(height * dpr);
+      const colors = [
+        [112, 165, 255],
+        [167, 139, 250],
+        [112, 217, 255]
+      ];
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const count = Math.min(
-      110,
-      Math.max(40, Math.floor((width * height) / 11000))
-    );
-
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      size: Math.random() * 1.8 + 0.5,
-      phase: Math.random() * Math.PI * 2,
-      color: colors[Math.floor(Math.random() * colors.length)]
-    }));
-
-    if (reduceMotion.matches) draw();
-  }
-
-  function draw(time = 0) {
-    ctx.clearRect(0, 0, width, height);
-
-    const elapsed = Math.min((time - lastTime) / 16.67 || 1, 2);
-    lastTime = time;
-
-    particles.forEach((p, i) => {
-      p.phase += 0.008 * elapsed;
-
-      // Floating movement
-      p.x += (p.vx + Math.sin(p.phase) * 0.12) * elapsed;
-      p.y += (p.vy + Math.cos(p.phase * 0.8) * 0.12) * elapsed;
-
-      // Soft repulsion around the cursor
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const distance = Math.hypot(dx, dy);
-      const radius = 125;
-
-      if (distance < radius && distance > 0) {
-        const force = (1 - distance / radius) * 0.65;
-        p.x += (dx / distance) * force * elapsed;
-        p.y += (dy / distance) * force * elapsed;
-      }
-
-      // Wrap around screen edges
-      if (p.x < -10) p.x = width + 10;
-      if (p.x > width + 10) p.x = -10;
-      if (p.y < -10) p.y = height + 10;
-      if (p.y > height + 10) p.y = -10;
-
-      const [r, g, b] = p.color;
-      const glow = 0.45 + Math.sin(p.phase) * 0.2;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${glow})`;
-      ctx.shadowBlur = 12;
-      ctx.shadowColor = `rgba(${r}, ${g}, ${b}, 0.6)`;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-
-      // Connect nearby particles
-      for (let j = i + 1; j < particles.length; j++) {
-        const other = particles[j];
-        const distance = Math.hypot(
-          p.x - other.x,
-          p.y - other.y
+      function createParticles() {
+        const count = Math.min(
+          110,
+          Math.max(40, Math.floor((width * height) / 11000))
         );
 
-        if (distance < 100) {
-          const alpha = (1 - distance / 100) * 0.15;
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          size: Math.random() * 1.8 + 0.5,
+          phase: Math.random() * Math.PI * 2,
+          color: colors[
+            Math.floor(Math.random() * colors.length)
+          ]
+        }));
+      }
 
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(other.x, other.y);
-          ctx.strokeStyle = `rgba(132, 160, 255, ${alpha})`;
-          ctx.lineWidth = 0.7;
-          ctx.stroke();
+      function resize() {
+        const dpr = Math.min(
+          window.devicePixelRatio || 1,
+          2
+        );
+
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        createParticles();
+
+        // Redraw immediately when motion is disabled.
+        if (reduceMotion.matches) {
+          draw();
         }
       }
-    });
 
-    if (!reduceMotion.matches) {
-      animationId = requestAnimationFrame(draw);
-    }
-  }
+      function draw(time = 0) {
+        if (destroyed) return;
 
-  window.addEventListener("pointermove", (event) => {
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-  }, { passive: true });
+        ctx.clearRect(0, 0, width, height);
 
-  window.addEventListener("pointerleave", () => {
-    mouse.x = -1000;
-    mouse.y = -1000;
-  });
+        const elapsed = Math.min(
+          Math.max((time - lastTime) / 16.67 || 1, 0),
+          2
+        );
 
-  window.addEventListener("resize", resize);
+        lastTime = time;
 
-  reduceMotion.addEventListener("change", () => {
-    cancelAnimationFrame(animationId);
-    lastTime = 0;
-    draw();
-  });
+        particles.forEach((p, i) => {
+          p.phase += 0.008 * elapsed;
 
-  resize();
+          // Floating movement.
+          p.x += (
+            p.vx + Math.sin(p.phase) * 0.12
+          ) * elapsed;
 
-  if (!reduceMotion.matches) {
-    animationId = requestAnimationFrame(draw);
-  }
-})();
-</script>
+          p.y += (
+            p.vy + Math.cos(p.phase * 0.8) * 0.12
+          ) * elapsed;
+
+          // Soft repulsion around the cursor.
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const distance = Math.hypot(dx, dy);
+          const radius = 125;
+
+          if (distance < radius && distance > 0) {
+            const force = (1 - distance / radius) * 0.65;
+
+            p.x += (dx / distance) * force * elapsed;
+            p.y += (dy / distance) * force * elapsed;
+          }
+
+          // Wrap around screen edges.
+          if (p.x < -10) p.x = width + 10;
+          if (p.x > width + 10) p.x = -10;
+          if (p.y < -10) p.y = height + 10;
+          if (p.y > height + 10) p.y = -10;
+
+          const [r, g, b] = p.color;
+          const glow = 0.45 + Math.sin(p.phase) * 0.2;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+          ctx.fillStyle =
+            `rgba(${r}, ${g}, ${b}, ${glow})`;
+
+          ctx.shadowBlur = 12;
+          ctx.shadowColor =
+            `rgba(${r}, ${g}, ${b}, 0.6)`;
+
+          ctx.fill();
+          ctx.shadowBlur = 0;
+
+          // Connect nearby particles.
+          for (let j = i + 1; j < particles.length; j++) {
+            const other = particles[j];
+
+            const lineDistance = Math.hypot(
+              p.x - other.x,
+              p.y - other.y
+            );
+
+            if (lineDistance < 100) {
+              const alpha =
+                (1 - lineDistance / 100) * 0.15;
+
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(other.x, other.y);
+
+              ctx.strokeStyle =
+                `rgba(132, 160, 255, ${alpha})`;
+
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        });
+
+        // Respect the user's motion preferences.
+        if (!reduceMotion.matches) {
+          animationId = requestAnimationFrame(draw);
+        } else {
+          animationId = null;
+        }
+      }
+
+      function startAnimation() {
+        if (destroyed || animationId !== null) return;
+
+        lastTime = 0;
+        animationId = requestAnimationFrame(draw);
+      }
+
+      function stopAnimation() {
+        if (animationId !== null) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      }
+
+      function handlePointerMove(event) {
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+      }
+
+      function handlePointerLeave() {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      }
+
+      function handleMotionChange() {
+        stopAnimation();
+        lastTime = 0;
+
+        if (reduceMotion.matches) {
+          draw();
+        } else {
+          startAnimation();
+        }
+      }
+
+      window.addEventListener(
+        "pointermove",
+        handlePointerMove,
+        { passive: true }
+      );
+
+      document.documentElement.addEventListener(
+        "pointerleave",
+        handlePointerLeave
+      );
+
+      window.addEventListener("resize", resize, {
+        passive: true
+      });
+
+      if (reduceMotion.addEventListener) {
+        reduceMotion.addEventListener(
+          "change",
+          handleMotionChange
+        );
+      } else {
+        // Compatibility with older browsers.
+        reduceMotion.addListener(handleMotionChange);
+      }
+
+      resize();
+
+      if (!reduceMotion.matches) {
+        startAnimation();
+      }
+
+      // Stop animation when leaving the page.
+      window.addEventListener("pagehide", () => {
+        destroyed = true;
+        stopAnimation();
+      }, { once: true });
+    })();
+  </script>
 
 </body>
 </html>
