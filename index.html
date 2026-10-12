@@ -81,7 +81,19 @@
       color: #080b14;
       transform: rotate(-4deg);
     }
+.avatar {
+  overflow: hidden;
+}
 
+.avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+  transform: rotate(4deg) scale(1.12);
+}
     .status {
       display: inline-flex;
       align-items: center;
@@ -265,7 +277,9 @@
 
 <body>
   <main>
-    <div class="avatar" aria-label="Adam Hussein initials">AH</div>
+ <div class="avatar">
+  <img src="profile.jpeg" alt="Adam Hussein">
+</div>
 
     <div class="status">OFFICIAL PROFILE</div>
 
